@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pAW-hn-9Wn">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ymo-Ju-dTe">
+            <objects>
+                <navigationController id="pAW-hn-9Wn" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gih-Vg-Paf">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="wf0-7C-0wg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v19-bE-Dsx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-735" y="28"/>
+        </scene>
+        <!--UITextView-html-demo-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTE-xB-h6M">
+                                <rect key="frame" x="149.66666666666666" y="296" width="94" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="直接加载"/>
+                                <connections>
+                                    <segue destination="tks-x6-q1J" kind="show" id="SoQ-BF-fzc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBN-7y-ZaH">
+                                <rect key="frame" x="132.66666666666666" y="396" width="127.99999999999997" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="修改后的加载"/>
+                                <connections>
+                                    <segue destination="ME6-c5-ppK" kind="show" id="xUj-Fs-tV2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NTE-xB-h6M" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="GZP-U2-6pr"/>
+                            <constraint firstItem="IBN-7y-ZaH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="K7Y-Hz-xM3"/>
+                            <constraint firstItem="NTE-xB-h6M" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="193" id="TLB-Vc-S66"/>
+                            <constraint firstItem="IBN-7y-ZaH" firstAttribute="top" secondItem="NTE-xB-h6M" secondAttribute="bottom" constant="65" id="muk-Me-ftw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="UITextView-html-demo" id="wM4-2E-OHq">
+                        <barButtonItem key="rightBarButtonItem" title="清除缓存" id="UH4-ll-NdN">
+                            <connections>
+                                <action selector="onClearCache:" destination="BYZ-38-t0r" id="2hf-WF-rdy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="67.938931297709928" y="3.5211267605633805"/>
+        </scene>
+        <!--直接加载效果-->
+        <scene sceneID="pDw-0e-z9b">
+            <objects>
+                <viewController id="tks-x6-q1J" customClass="TextHtmlController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zym-iU-Z0Z">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="加载中..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="suH-nx-CCf">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aWJ-b9-kR8"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="suH-nx-CCf" firstAttribute="leading" secondItem="aWJ-b9-kR8" secondAttribute="leading" id="Bn0-9J-O9J"/>
+                            <constraint firstItem="aWJ-b9-kR8" firstAttribute="top" secondItem="suH-nx-CCf" secondAttribute="top" id="HMb-1x-Yoa"/>
+                            <constraint firstItem="aWJ-b9-kR8" firstAttribute="bottom" secondItem="suH-nx-CCf" secondAttribute="bottom" id="StQ-Wl-UJQ"/>
+                            <constraint firstItem="aWJ-b9-kR8" firstAttribute="trailing" secondItem="suH-nx-CCf" secondAttribute="trailing" id="eYJ-0R-u9k"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="直接加载效果" id="WH7-04-zHC"/>
+                    <connections>
+                        <outlet property="textView" destination="suH-nx-CCf" id="Fqa-2p-m2t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="InX-gN-GQU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="827" y="-225"/>
+        </scene>
+        <!--优化后的效果-->
+        <scene sceneID="Fv8-J3-TvL">
+            <objects>
+                <viewController id="ME6-c5-ppK" customClass="TextHtmlFixedController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YHD-M1-hfO">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="加载中..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6K5-E8-TEi">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8sE-qu-sEn"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8sE-qu-sEn" firstAttribute="bottom" secondItem="6K5-E8-TEi" secondAttribute="bottom" id="LNw-Ry-YJD"/>
+                            <constraint firstItem="8sE-qu-sEn" firstAttribute="top" secondItem="6K5-E8-TEi" secondAttribute="top" id="NoK-26-zkv"/>
+                            <constraint firstItem="6K5-E8-TEi" firstAttribute="leading" secondItem="8sE-qu-sEn" secondAttribute="leading" id="eBw-s6-kNz"/>
+                            <constraint firstItem="8sE-qu-sEn" firstAttribute="trailing" secondItem="6K5-E8-TEi" secondAttribute="trailing" id="gju-I6-gGE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="优化后的效果" id="Yis-Wz-iRK"/>
+                    <connections>
+                        <outlet property="textView" destination="6K5-E8-TEi" id="5Co-uz-KgO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8cx-L3-U5e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="859" y="420"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
