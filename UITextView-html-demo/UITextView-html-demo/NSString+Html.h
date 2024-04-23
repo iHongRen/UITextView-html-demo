@@ -11,13 +11,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (Html)
 
-- (NSAttributedString*)toHtmlAttr;
+- (NSAttributedString*)htmlToAttr;
 
-- (void)htmlContentWidth:(CGFloat)width block:(void(^)(NSDictionary *obj, BOOL finish))block;
+- (NSString*)addImgStyle:(CGFloat)width;
 
-- (void)htmlContentWidth:(CGFloat)width bodyCSS:(NSString*)bodyCSS block:(void(^)(NSDictionary *obj, BOOL finish))block;
+- (NSString*)storeKeyForUrl;
 
-- (void)htmlFont16ContentWidth:(CGFloat)width block:(void(^)(NSDictionary *obj, BOOL finish))block;
+- (BOOL)isBase64Url;
+
+- (void)asyncHtmlToAttr:(void(^)( NSAttributedString * _Nullable attr,  NSArray * _Nullable imgUrls, BOOL finish))block;
 @end
 
 NS_ASSUME_NONNULL_END

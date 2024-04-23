@@ -19,6 +19,9 @@
 		8001CE4B2BD5180A0049C5C1 /* html-text.json in Resources */ = {isa = PBXBuildFile; fileRef = 8001CE4A2BD5180A0049C5C1 /* html-text.json */; };
 		80692D832BD6681900F79DC2 /* NSString+Html.m in Sources */ = {isa = PBXBuildFile; fileRef = 80692D822BD6681900F79DC2 /* NSString+Html.m */; };
 		80692D882BD6951C00F79DC2 /* default_cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 80692D872BD6951C00F79DC2 /* default_cover.png */; };
+		808C74672BD7885A00010246 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 808C74662BD7885A00010246 /* WebViewController.m */; };
+		808C74692BD78A0C00010246 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C74682BD78A0C00010246 /* WebKit.framework */; };
+		808C746D2BD79E7300010246 /* UIViewController+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 808C746C2BD79E7300010246 /* UIViewController+Ext.m */; };
 		D018FCF35FDD4407CB89ECB4 /* libPods-UITextView-html-demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5FDDF842AAF88342EE4282 /* libPods-UITextView-html-demo.a */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +49,11 @@
 		80692D812BD6681900F79DC2 /* NSString+Html.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Html.h"; sourceTree = "<group>"; };
 		80692D822BD6681900F79DC2 /* NSString+Html.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Html.m"; sourceTree = "<group>"; };
 		80692D872BD6951C00F79DC2 /* default_cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_cover.png; sourceTree = "<group>"; };
+		808C74652BD7885A00010246 /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		808C74662BD7885A00010246 /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		808C74682BD78A0C00010246 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		808C746B2BD79E7300010246 /* UIViewController+Ext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Ext.h"; sourceTree = "<group>"; };
+		808C746C2BD79E7300010246 /* UIViewController+Ext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Ext.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				808C74692BD78A0C00010246 /* WebKit.framework in Frameworks */,
 				D018FCF35FDD4407CB89ECB4 /* libPods-UITextView-html-demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +102,10 @@
 				80692D822BD6681900F79DC2 /* NSString+Html.m */,
 				8001CE472BD5133F0049C5C1 /* TextHtmlFixedController.h */,
 				8001CE482BD5133F0049C5C1 /* TextHtmlFixedController.m */,
+				808C74652BD7885A00010246 /* WebViewController.h */,
+				808C74662BD7885A00010246 /* WebViewController.m */,
+				808C746B2BD79E7300010246 /* UIViewController+Ext.h */,
+				808C746C2BD79E7300010246 /* UIViewController+Ext.m */,
 				8001CE4A2BD5180A0049C5C1 /* html-text.json */,
 				80692D872BD6951C00F79DC2 /* default_cover.png */,
 				8001CE342BD50FE90049C5C1 /* Main.storyboard */,
@@ -116,6 +129,7 @@
 		DBF7B5F7CD2892C10089108D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				808C74682BD78A0C00010246 /* WebKit.framework */,
 				7F5FDDF842AAF88342EE4282 /* libPods-UITextView-html-demo.a */,
 			);
 			name = Frameworks;
@@ -240,7 +254,9 @@
 				8001CE332BD50FE90049C5C1 /* ViewController.m in Sources */,
 				80692D832BD6681900F79DC2 /* NSString+Html.m in Sources */,
 				8001CE2D2BD50FE90049C5C1 /* AppDelegate.m in Sources */,
+				808C74672BD7885A00010246 /* WebViewController.m in Sources */,
 				8001CE492BD5133F0049C5C1 /* TextHtmlFixedController.m in Sources */,
+				808C746D2BD79E7300010246 /* UIViewController+Ext.m in Sources */,
 				8001CE462BD5132F0049C5C1 /* TextHtmlController.m in Sources */,
 				8001CE3E2BD50FEA0049C5C1 /* main.m in Sources */,
 				8001CE302BD50FE90049C5C1 /* SceneDelegate.m in Sources */,
@@ -393,7 +409,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N27ZWB6MHJ;
+				DEVELOPMENT_TEAM = 93YK6RZNAR;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "UITextView-html-demo/Info.plist";
@@ -423,7 +439,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N27ZWB6MHJ;
+				DEVELOPMENT_TEAM = C98SFK75FC;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "UITextView-html-demo/Info.plist";

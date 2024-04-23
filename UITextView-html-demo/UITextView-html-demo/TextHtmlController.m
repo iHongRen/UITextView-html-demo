@@ -7,6 +7,7 @@
 
 #import "TextHtmlController.h"
 #import "NSString+Html.h"
+#import "UIViewController+Ext.h"
 
 @interface TextHtmlController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -19,38 +20,30 @@
     [super viewDidLoad];
     
     self.textView.editable = NO;
-    self.textView.layoutManager.usesFontLeading = NO;
-    self.textView.layoutManager.allowsNonContiguousLayout = NO;
+
+    [self loadHtml];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)loadHtml {
     
     CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
-    
-    NSAttributedString *htmlAttrString = [[self htmlFormJson] toHtmlAttr];
-    self.textView.attributedText = htmlAttrString;
-    
-    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
-    NSTimeInterval executionTime = endTime - startTime;
-    NSLog(@"直接加载耗时: %.2f 秒", executionTime);
-    
-    [self setupRight:executionTime];
-}
 
-- (void)setupRight:(CGFloat)time {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"耗时: %.2f 秒", time] style:(UIBarButtonItemStylePlain) target:nil action:Nil];
-    self.navigationItem.rightBarButtonItem = item;
-}
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSAttributedString *htmlAttrString = [[self htmlFormJson] htmlToAttr];
 
-- (NSString*)htmlFormJson {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"html-text" withExtension:@"json"];
-    NSData *jsonData = [NSData dataWithContentsOfURL:url];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            self.textView.attributedText = htmlAttrString;
+            
+            CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
+            NSTimeInterval executionTime = endTime - startTime;
+            NSLog(@"直接加载耗时: %.2f 秒", executionTime);
+            
+            [self setupRight:executionTime];
+
+        });
+    });
     
-    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
-    
-    NSString *text = jsonDict[@"text"];
-    return text;
 }
 
 

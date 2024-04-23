@@ -34,19 +34,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTE-xB-h6M">
-                                <rect key="frame" x="149.66666666666666" y="296" width="94" height="35"/>
+                                <rect key="frame" x="120" y="314" width="153" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="直接加载"/>
+                                <buttonConfiguration key="configuration" style="plain" title="UITextView+html"/>
                                 <connections>
                                     <segue destination="tks-x6-q1J" kind="show" id="SoQ-BF-fzc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBN-7y-ZaH">
-                                <rect key="frame" x="132.66666666666666" y="396" width="127.99999999999997" height="35"/>
+                                <rect key="frame" x="101.66666666666669" y="393" width="190" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="修改后的加载"/>
+                                <buttonConfiguration key="configuration" style="plain" title="优化UITextView+html"/>
                                 <connections>
                                     <segue destination="ME6-c5-ppK" kind="show" id="xUj-Fs-tV2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaW-qC-VdO">
+                                <rect key="frame" x="129.66666666666666" y="472" width="133.99999999999997" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="webview+html"/>
+                                <connections>
+                                    <segue destination="Ts4-m4-r3u" kind="show" id="De1-t5-mum"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -55,8 +63,10 @@
                         <constraints>
                             <constraint firstItem="NTE-xB-h6M" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="GZP-U2-6pr"/>
                             <constraint firstItem="IBN-7y-ZaH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="K7Y-Hz-xM3"/>
-                            <constraint firstItem="NTE-xB-h6M" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="193" id="TLB-Vc-S66"/>
-                            <constraint firstItem="IBN-7y-ZaH" firstAttribute="top" secondItem="NTE-xB-h6M" secondAttribute="bottom" constant="65" id="muk-Me-ftw"/>
+                            <constraint firstItem="IBN-7y-ZaH" firstAttribute="top" secondItem="NTE-xB-h6M" secondAttribute="bottom" constant="44" id="muk-Me-ftw"/>
+                            <constraint firstItem="IBN-7y-ZaH" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-50" id="qgv-9a-BtC"/>
+                            <constraint firstItem="DaW-qC-VdO" firstAttribute="top" secondItem="IBN-7y-ZaH" secondAttribute="bottom" constant="44" id="sCx-7I-fVx"/>
+                            <constraint firstItem="DaW-qC-VdO" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="uxe-xU-Cbj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="UITextView-html-demo" id="wM4-2E-OHq">
@@ -71,7 +81,7 @@
             </objects>
             <point key="canvasLocation" x="67.938931297709928" y="3.5211267605633805"/>
         </scene>
-        <!--直接加载效果-->
+        <!--UITextView-html-->
         <scene sceneID="pDw-0e-z9b">
             <objects>
                 <viewController id="tks-x6-q1J" customClass="TextHtmlController" sceneMemberID="viewController">
@@ -96,7 +106,7 @@
                             <constraint firstItem="aWJ-b9-kR8" firstAttribute="trailing" secondItem="suH-nx-CCf" secondAttribute="trailing" id="eYJ-0R-u9k"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="直接加载效果" id="WH7-04-zHC"/>
+                    <navigationItem key="navigationItem" title="UITextView-html" id="WH7-04-zHC"/>
                     <connections>
                         <outlet property="textView" destination="suH-nx-CCf" id="Fqa-2p-m2t"/>
                     </connections>
@@ -105,7 +115,42 @@
             </objects>
             <point key="canvasLocation" x="827" y="-225"/>
         </scene>
-        <!--优化后的效果-->
+        <!--webview-html-->
+        <scene sceneID="J6x-nJ-wpr">
+            <objects>
+                <viewController id="Ts4-m4-r3u" customClass="WebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CD0-db-jHK">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ri-zU-JXP">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="D8q-ti-Jfn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1ri-zU-JXP" firstAttribute="top" secondItem="D8q-ti-Jfn" secondAttribute="top" id="4Pa-hr-4mD"/>
+                            <constraint firstItem="D8q-ti-Jfn" firstAttribute="trailing" secondItem="1ri-zU-JXP" secondAttribute="trailing" id="gi1-lo-Lv4"/>
+                            <constraint firstItem="1ri-zU-JXP" firstAttribute="leading" secondItem="D8q-ti-Jfn" secondAttribute="leading" id="jlF-HB-QBF"/>
+                            <constraint firstItem="D8q-ti-Jfn" firstAttribute="bottom" secondItem="1ri-zU-JXP" secondAttribute="bottom" id="lOA-MI-alr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="webview-html" id="exW-Gm-OpA"/>
+                    <connections>
+                        <outlet property="webView" destination="1ri-zU-JXP" id="D8Y-qq-zpE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9t2-bg-c0Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="798" y="1115"/>
+        </scene>
+        <!--优化TextView-html-->
         <scene sceneID="Fv8-J3-TvL">
             <objects>
                 <viewController id="ME6-c5-ppK" customClass="TextHtmlFixedController" sceneMemberID="viewController">
@@ -130,7 +175,7 @@
                             <constraint firstItem="8sE-qu-sEn" firstAttribute="trailing" secondItem="6K5-E8-TEi" secondAttribute="trailing" id="gju-I6-gGE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="优化后的效果" id="Yis-Wz-iRK"/>
+                    <navigationItem key="navigationItem" title="优化TextView-html" id="Yis-Wz-iRK"/>
                     <connections>
                         <outlet property="textView" destination="6K5-E8-TEi" id="5Co-uz-KgO"/>
                     </connections>
