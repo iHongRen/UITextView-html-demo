@@ -42,7 +42,7 @@ NSString *newHtml = [NSString stringWithFormat:@"<head><style>body%@img{width:%f
         NSAttributedString *att = [attr attributedSubstringFromRange:range];
         // 忽略 table 标签
         if (![[att description] containsString:@"NSTextTableBlock"]) {
-            style.lineSpacing = 8;
+            style.lineSpacing = lineHeight;
         }
     }];
     return attr;
@@ -55,7 +55,7 @@ NSString *newHtml = [NSString stringWithFormat:@"<head><style>body%@img{width:%f
 
 这种时候，我们可以先使用正则找出所有的 `<img>` ，然后有两个种方案选择：
 
-1、将所有 `<img>` 删除， 先显示删除图片后的文本内容，再去加载原始的 html。
+1、将所有 `<img>` 删除， 先显示无图片的文本内容，再去加载原始带图片的 html。
 
 ```objective-c
 NSString *pattern = @"<img[^>]*>";
@@ -63,7 +63,7 @@ NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:p
 NSString *resultString = [regex stringByReplacingMatchesInString:html options:0 range:NSMakeRange(0, html.length) withTemplate:@""];
 ```
 
-2、将所有 `<img>` 替换为本地的默认图片，先显示，再去加载原始的 html。
+2、将所有 `<img>` 替换为本地的默认图片，先显示带默认图片的，再去加载原始的 html。
 
 ```objective-c
  // 使用占位图
@@ -71,7 +71,7 @@ NSString *fileUrl = [[NSBundle mainBundle] URLForResource:@"default_cover" withE
 NSString *replacement =[NSString stringWithFormat:@"<img src=\"%@\">", fileUrl];
 
 NSString *pattern = @"<\\s*img\\s+[^>]*?src\\s*=\\s*[\'\"](.*?)[\'\"]\\s*(alt=[\'\"](.*?)[\'\"])?[^>]*?\\/?\\s*>";
-    NSRegularExpression *regexImg = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
+NSRegularExpression *regexImg = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
 NSString *resultString = [regexImg stringByReplacingMatchesInString:html options:0 range:NSMakeRange(0, html.length) withTemplate:replacement];
 ```
 
@@ -172,7 +172,6 @@ if (data) {
 }
 NSURL *URL = [key fileURLForImageKey];
 
-
 ```
 
 ##### 6、如果你的 html 比较复杂，在一些机型上可能会遇到加载卡死、崩溃。
@@ -185,14 +184,14 @@ self.textView.layoutManager.usesFontLeading = NO;
 
 // 用于指定文本容器（text container）是否允许非连续布局。
 self.textView.layoutManager.allowsNonContiguousLayout = NO;
-
 ```
 
-##### 7、如果使用 textView 的宽度去计算富文本高度，把这个高度赋予 textView 时，内容显示不完整。
+##### 7、如果使用 textView 的宽度去计算富文本高度，再把这个高度赋予 textView 时，内容显示不完整。
 
-这是因为 textView 有自带的边距导致的
+这是因为 textView 有默认自带的边距，导致计算用的宽度和显示的宽度不一致。
 
 ```objective-c
+// 取消默认的边距
 self.textView.textContainer.lineFragmentPadding = 0;
 self.textView.textContainerInset = UIEdgeInsetsZero;
 
@@ -200,7 +199,6 @@ self.textView.textContainerInset = UIEdgeInsetsZero;
     CGSize contextSize = [attr boundingRectWithSize:(CGSize){width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     return contextSize.height;
 }
-
 ```
 
 ##### 8、如果你想保留 textView 可交互，又要禁止它的长按弹出菜单(拷贝，选择，...)
@@ -212,13 +210,22 @@ self.textView.editable = YES;
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     return NO;
 }
+```
 
+##### 9、默认链接是用外部浏览器打开的，如果你想用 App 内 webView 打开，可以拦截 url 的交互
+
+```
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    // 点击 URL 交互拦截
+    NSLog(@"URL:%@",URL);
+    return YES;
+}
 ```
 
 
 
-如果本文对你有帮助，请给个 star。
+如果本 demo 对您有帮助，请给个 star。
 
 demo 中有耗时显示，但不同机型测试结果不一。
 
-<img src="./screenshots/screenshot.png" width="300">
+<img src="https://github.com/iHongRen/UITextView-html-demo/blob/main/screenshots/screenshot.png" width="300">
