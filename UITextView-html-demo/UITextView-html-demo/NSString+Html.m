@@ -87,6 +87,8 @@ static inline NSString * _Nonnull kTempFileNameForKey(NSString * _Nullable key) 
 //            直接删除img标签
 //            NSString *pattern = @"<img[^>]*>";
 //            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+//            NSString *resultString = [regex stringByReplacingMatchesInString:self options:0 range:NSMakeRange(0, self.length) withTemplate:@""];
+
             
             // 使用占位图
             NSString *fileUrl = [[NSBundle mainBundle] URLForResource:@"default_cover" withExtension:@"png"].absoluteString;

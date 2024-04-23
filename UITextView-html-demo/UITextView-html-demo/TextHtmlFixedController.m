@@ -102,9 +102,21 @@
     }];
 }
 
-
+// 计算高度
 - (CGFloat)heightForAttr:(NSAttributedString *)attr width:(CGFloat)width {
     CGSize contextSize = [attr boundingRectWithSize:(CGSize){width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     return contextSize.height;
+}
+
+// 设置行高
+- (NSAttributedString*)addLineHeight:(CGFloat)lineHeight attr:(NSAttributedString*)attr {
+    [attr enumerateAttribute:NSParagraphStyleAttributeName inRange:NSMakeRange(0, attr.length) options:(NSAttributedStringEnumerationLongestEffectiveRangeNotRequired) usingBlock:^(NSMutableParagraphStyle *style, NSRange range, BOOL * _Nonnull stop) {
+        NSAttributedString *att = [attr attributedSubstringFromRange:range];
+        // 忽略 table 标签
+        if (![[att description] containsString:@"NSTextTableBlock"]) {
+            style.lineSpacing = 8;
+        }
+    }];
+    return attr;
 }
 @end
