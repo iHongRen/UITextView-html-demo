@@ -34,19 +34,12 @@
     [self loadHtml];
 }
 
-#pragma mark - UITextViewDelegate
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    return NO;
-}
-
-- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
-    
-//    NSLog(@"imgUrls: %@", self.imgUrls);
-    
-    // 实现点击图片查看大图
+// 通过点击的 textAttachment filename 与 本地存储的图片 path 对比
+// 从而找到对应点击的图片索引
+- (void)tapImage1:(NSTextAttachment*)textAttachment {
     NSString *fileName = textAttachment.fileWrapper.filename;
     if (!fileName) {
-        return YES;
+        return;
     }
     
     for (NSInteger i=0; i<self.imgUrls.count; i++) {
@@ -57,7 +50,6 @@
             
             NSLog(@"选中Url: %@", imgUrl);
             NSLog(@"选中FileURL: %@", [NSURL fileURLWithPath:path]);
-
             NSLog(@"选中index: %@", @(i));
             
             NSString *url = imgUrl;
@@ -69,6 +61,41 @@
             break;
         }
     }
+}
+
+// 通过遍历所有 NSAttachmentAttributeName 与点击的 textAttachment 对比
+// 从而找到对应点击的图片索引
+- (void)tapImage2:(NSTextAttachment*)textAttachment {
+    __block NSInteger index = 0;
+    [self.textView.attributedText enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, self.textView.attributedText.length) options:(NSAttributedStringEnumerationLongestEffectiveRangeNotRequired) usingBlock:^(NSTextAttachment *attachment, NSRange range, BOOL * _Nonnull stop) {
+        
+        if (attachment) {
+
+            if (attachment==textAttachment) {
+                *stop = YES;
+            } else {
+                index++;
+            }
+        }
+    }];
+    
+    if (index < self.imgUrls.count) {
+        [self showToast:[NSString stringWithFormat:@"你点击了第%@张图片\n%@",@(index),self.imgUrls[index]]];
+    }
+}
+
+#pragma mark - UITextViewDelegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    return NO;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    
+//    NSLog(@"imgUrls: %@", self.imgUrls);
+    
+    [self tapImage1:textAttachment];
+    
+//    [self tapImage2:textAttachment];
     return YES;
 }
 

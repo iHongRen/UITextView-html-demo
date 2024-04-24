@@ -174,7 +174,38 @@ NSURL *URL = [key fileURLForImageKey];
 
 ```
 
-##### 6、如果你的 html 比较复杂，在一些机型上可能会遇到加载卡死、崩溃。
+##### 6、还有一种较为简单的方法能获取点击的图片
+
+通过遍历所有 NSAttachmentAttributeName 与点击的 textAttachment 对比，从而找到对应点击的图片索引
+
+```objective-c
+- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+
+    __block NSInteger index = 0;
+    [self.textView.attributedText enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, self.textView.attributedText.length) options:(NSAttributedStringEnumerationLongestEffectiveRangeNotRequired) usingBlock:^(NSTextAttachment *attachment, NSRange range, BOOL * _Nonnull stop) {
+        
+        if (attachment) {
+
+            if (attachment==textAttachment) {
+                *stop = YES;
+            } else {
+                index++;
+            }
+        }
+    }];
+    
+    // self.imgUrls 是我们匹配出的所有图片url 
+    if (index < self.imgUrls.count) {
+        [self showToast:[NSString stringWithFormat:@"你点击了第%@张图片\n%@",@(index),self.imgUrls[index]]];
+    }
+
+  return YES;
+}
+```
+
+
+
+##### 7、如果你的 html 比较复杂，在一些机型上可能会遇到加载卡死、崩溃。
 
 你可以关闭一些属性，这些属性会增加布局复杂性和计算成本，导致渲染卡死
 
@@ -186,7 +217,7 @@ self.textView.layoutManager.usesFontLeading = NO;
 self.textView.layoutManager.allowsNonContiguousLayout = NO;
 ```
 
-##### 7、如果使用 textView 的宽度去计算富文本高度，再把这个高度赋予 textView 时，内容显示不完整。
+##### 8、如果使用 textView 的宽度去计算富文本高度，再把这个高度赋予 textView 时，内容显示不完整。
 
 这是因为 textView 有默认自带的边距，导致计算用的宽度和显示的宽度不一致。
 
@@ -201,7 +232,7 @@ self.textView.textContainerInset = UIEdgeInsetsZero;
 }
 ```
 
-##### 8、如果你想保留 textView 可交互，又要禁止它的长按弹出菜单(拷贝，选择，...)
+##### 9、如果你想保留 textView 可交互，又要禁止它的长按弹出菜单(拷贝，选择，...)
 
 ```objective-c
 self.textView.editable = YES;
@@ -212,7 +243,7 @@ self.textView.editable = YES;
 }
 ```
 
-##### 9、默认链接是用外部浏览器打开的，如果你想用 App 内 webView 打开，可以拦截 url 的交互
+##### 10、默认链接是用外部浏览器打开的，如果你想用 App 内 webView 打开，可以拦截 url 的交互
 
 ```
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
@@ -224,8 +255,10 @@ self.textView.editable = YES;
 
 
 
-如果本 demo 对您有帮助，请给个 star。
+如果本文对您有帮助，请给个 star。
+
+**demo** 地址：https://github.com/iHongRen/UITextView-html-demo 
 
 demo 中有耗时显示，但不同机型测试结果不一。
 
-<img src="https://github.com/iHongRen/UITextView-html-demo/blob/main/screenshots/screenshot.png" width="300">
+<img src="https://raw.githubusercontent.com/iHongRen/UITextView-html-demo/main/screenshots/screenshot.png" width="300">
